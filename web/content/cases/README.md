@@ -56,5 +56,5 @@ actual content. The sanchez files have example narrative written. See
 `_template.pt.md` and `_template.en.md` for the section guide.
 
 ## Regenerating cases
-Run `node scripts/generate-cases.mjs` from the repo root to regenerate.
+Run `node scripts/generate-cases.mjs` from repo root to regenerate.
 The script preserves any existing narrative body text (only updates frontmatter).

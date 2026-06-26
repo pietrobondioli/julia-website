@@ -72,10 +72,10 @@ Casos inicialmente candidatos a Tier A:
 ## Organização de Conteúdo (repo)
 
 ### Conteúdo editorial
-- `site/content/profile/profile.pt.md`
-- `site/content/profile/profile.en.md`
-- `site/content/cases/*.pt.md`
-- `site/content/cases/*.en.md`
+- `web/content/profile/profile.pt.md`
+- `web/content/profile/profile.en.md`
+- `web/content/cases/*.pt.md`
+- `web/content/cases/*.en.md`
 
 ### Mídia
 - Originais ficam fora do app para preservação

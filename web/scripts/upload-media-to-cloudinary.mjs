@@ -39,7 +39,7 @@ cloudinary.config({
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, "..", "..");
 const rawRoot = path.join(repoRoot, "Portfólio - Julia Fialho");
-const casesDir = path.join(repoRoot, "site", "content", "cases");
+const casesDir = path.join(repoRoot, "web", "content", "cases");
 
 const rawProjectMap = {
   aura: " [Acadêmico] Aurá",

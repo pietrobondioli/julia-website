@@ -28,9 +28,9 @@ export default async function AboutPage({
           <p className="text-sm text-black/55">
             Conteúdo será conectado em seguida aos arquivos:
             <br />
-            <code>site/content/profile/profile.pt.md</code>
+            <code>web/content/profile/profile.pt.md</code>
             <br />
-            <code>site/content/profile/profile.en.md</code>
+            <code>web/content/profile/profile.en.md</code>
           </p>
         </section>
       </Reveal>

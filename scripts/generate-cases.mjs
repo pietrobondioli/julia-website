@@ -2,7 +2,7 @@
  * generate-cases.mjs
  *
  * Scans "Portfólio - Julia Fialho/" raw asset folders and generates
- * PT and EN markdown case files in site/content/cases/.
+ * PT and EN markdown case files in web/content/cases/.
  *
  * Run: node scripts/generate-cases.mjs
  */
@@ -14,7 +14,7 @@ import { fileURLToPath } from "node:url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
 const RAW = path.join(ROOT, "Portfólio - Julia Fialho");
-const OUT = path.join(ROOT, "site", "content", "cases");
+const OUT = path.join(ROOT, "web", "content", "cases");
 
 // ── slugify ──────────────────────────────────────────────────────────────
 function slugify(text) {

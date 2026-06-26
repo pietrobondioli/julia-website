@@ -5,7 +5,7 @@ import matter from "gray-matter";
 
 import type { Locale } from "@/lib/i18n";
 
-const root = path.join(process.cwd(), "..", "site", "content");
+const root = path.join(process.cwd(), "content");
 
 export type CaseMeta = {
   slug: string;
