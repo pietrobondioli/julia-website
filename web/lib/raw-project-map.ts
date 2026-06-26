@@ -1,0 +1,17 @@
+export const rawProjectMap: Record<string, string> = {
+  aura: " [Acadêmico] Aurá",
+  "analise-semiotica-takis": "[Acadêmico] Análise Semiótica Takis",
+  cinemark: "[Acadêmico] Cinemark",
+  "here-i-go-again": "[Acadêmico] Here I Go Again",
+  "natural-flow": "[Acadêmico] Natural Flow",
+  "oba-hortifruti": "[Acadêmico] Oba Hortifruti",
+  "the-body-shop": "[Acadêmico] The Body Shop",
+  "vital-fresh": "[Acadêmico] Vital Fresh",
+  "app-brasil": "[Agência PUC - Estágio] APP Brasil",
+  "paraisopolis-site": "[Agência PUC - Estágio] Paraisópolis - Site",
+  "jogos-universitarios-comunicacao-2024": "[Evento] Jogos Universitários Comunicação 2024",
+  "semana-publicidade-2024": "[Evento] Semana de Publicidade 2024",
+  freelancer: "[Freelancer]",
+  "fotografia-mulheres-puc": "[Projeto Pessoal] Fotografia Mulheres PUC",
+  "sanchez-rebranding": "[Projeto Voluntário] Sanchez",
+};
