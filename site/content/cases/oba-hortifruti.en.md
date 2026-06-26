@@ -10,9 +10,9 @@ category:
 tags:
   - "presentation"
   - "branding"
-coverImage: "/media/oba-hortifruti/Oba Hortifruti-Apresentação oficial.pdf"
+coverImage: "https://res.cloudinary.com/ddafzjx3u/image/upload/v1782507539/julia-portfolio/oba-hortifruti/oba-hortifruti-apresentacao-oficial.pdf"
 gallery:
-  - "/media/oba-hortifruti/Oba Hortifruti-Apresentação oficial.pdf"
+  - "https://res.cloudinary.com/ddafzjx3u/image/upload/v1782507539/julia-portfolio/oba-hortifruti/oba-hortifruti-apresentacao-oficial.pdf"
 video: ""
 tools:
   - "Photoshop"

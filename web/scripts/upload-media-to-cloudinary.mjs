@@ -64,7 +64,7 @@ const EXT_RESOURCE_TYPE = {
   ".mov": "video",
   ".mkv": "video",
   ".webm": "video",
-  ".pdf": "image",
+  ".pdf": "raw",
   ".png": "image",
   ".jpg": "image",
   ".jpeg": "image",
@@ -83,6 +83,13 @@ function sanitizePublicIdPart(input) {
     .replace(/-+/g, "-")
     .replace(/^[-/]+|[-/]+$/g, "")
     .toLowerCase();
+}
+
+function keyVariants(value) {
+  if (!value) return [];
+  const nfc = value.normalize("NFC");
+  const nfd = value.normalize("NFD");
+  return [...new Set([value, nfc, nfd])];
 }
 
 async function walk(dir) {
@@ -104,14 +111,25 @@ async function uploadFile(slug, absPath, relPath) {
   const resourceType = EXT_RESOURCE_TYPE[ext] || "raw";
   const relNoExt = relPath.slice(0, relPath.length - ext.length);
   const publicId = sanitizePublicIdPart(`${rootFolder}/${slug}/${relNoExt}`);
+  const stat = await fs.stat(absPath);
+  const isLarge = stat.size > 8 * 1024 * 1024;
 
-  const result = await cloudinary.uploader.upload(absPath, {
+  const uploadOptions = {
     resource_type: resourceType,
     public_id: publicId,
     overwrite: false,
     unique_filename: false,
     use_filename: false,
-  });
+  };
+
+  const result = isLarge
+    ? await new Promise((resolve, reject) => {
+        cloudinary.uploader.upload_large(absPath, uploadOptions, (error, res) => {
+          if (error) return reject(error);
+          resolve(res);
+        });
+      })
+    : await cloudinary.uploader.upload(absPath, uploadOptions);
 
   // secure_url works for image/video/raw
   return result.secure_url;
@@ -143,6 +161,14 @@ function parseYamlScalar(content, key) {
   const regex = new RegExp(`^${key}:\\s*"(.*)"\\s*$`, "m");
   const match = content.match(regex);
   return match ? match[1] : "";
+}
+
+function getMappedValue(uploadMap, value) {
+  for (const variant of keyVariants(value)) {
+    const mapped = uploadMap.get(variant);
+    if (mapped) return mapped;
+  }
+  return value;
 }
 
 function replaceYamlScalar(content, key, value) {
@@ -186,9 +212,9 @@ async function rewriteCaseFile(casePath, uploadMap) {
   const coverImage = parseYamlScalar(raw, "coverImage");
   const video = parseYamlScalar(raw, "video");
 
-  const mappedGallery = gallery.map((item) => uploadMap.get(item) || item);
-  const mappedCover = uploadMap.get(coverImage) || coverImage;
-  const mappedVideo = uploadMap.get(video) || video;
+  const mappedGallery = gallery.map((item) => getMappedValue(uploadMap, item));
+  const mappedCover = getMappedValue(uploadMap, coverImage);
+  const mappedVideo = getMappedValue(uploadMap, video);
 
   let next = raw;
   next = replaceYamlList(next, "gallery", mappedGallery);
@@ -228,10 +254,16 @@ async function main() {
 
       try {
         const cloudUrl = await uploadFile(slug, absPath, rel);
-        uploadMap.set(localMediaRef, cloudUrl);
+        for (const key of keyVariants(localMediaRef)) {
+          uploadMap.set(key, cloudUrl);
+        }
         console.log(`  ✓ ${rel}`);
       } catch (err) {
-        const msg = err instanceof Error ? err.message : String(err);
+        const maybe = err;
+        const msg =
+          (maybe && typeof maybe === "object" && "message" in maybe && maybe.message) ||
+          (maybe && typeof maybe === "object" && "error" in maybe && maybe.error?.message) ||
+          String(err);
         console.log(`  ✗ ${rel} -> ${msg}`);
       }
     }

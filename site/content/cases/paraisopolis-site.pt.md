@@ -15,12 +15,12 @@ tags:
 coverImage: "/media/paraisopolis-site/Paraisópolis - Site.pdf"
 gallery:
   - "/media/paraisopolis-site/Paraisópolis - Site.pdf"
-  - "/media/paraisopolis-site/Paraisópolis Site - JPGs/1.jpg"
-  - "/media/paraisopolis-site/Paraisópolis Site - JPGs/2.jpg"
-  - "/media/paraisopolis-site/Paraisópolis Site - JPGs/3.jpg"
-  - "/media/paraisopolis-site/Paraisópolis Site - JPGs/4.jpg"
-  - "/media/paraisopolis-site/Paraisópolis Site - JPGs/5.jpg"
-  - "/media/paraisopolis-site/Paraisópolis Site - JPGs/6.jpg"
+  - "https://res.cloudinary.com/ddafzjx3u/image/upload/v1782507617/julia-portfolio/paraisopolis-site/paraisopolis-site-jpgs/1.jpg"
+  - "https://res.cloudinary.com/ddafzjx3u/image/upload/v1782507618/julia-portfolio/paraisopolis-site/paraisopolis-site-jpgs/2.jpg"
+  - "https://res.cloudinary.com/ddafzjx3u/image/upload/v1782507619/julia-portfolio/paraisopolis-site/paraisopolis-site-jpgs/3.jpg"
+  - "https://res.cloudinary.com/ddafzjx3u/image/upload/v1782507620/julia-portfolio/paraisopolis-site/paraisopolis-site-jpgs/4.jpg"
+  - "https://res.cloudinary.com/ddafzjx3u/image/upload/v1782507621/julia-portfolio/paraisopolis-site/paraisopolis-site-jpgs/5.jpg"
+  - "https://res.cloudinary.com/ddafzjx3u/image/upload/v1782507622/julia-portfolio/paraisopolis-site/paraisopolis-site-jpgs/6.jpg"
 video: ""
 tools:
   - "Photoshop"
