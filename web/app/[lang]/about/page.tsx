@@ -4,11 +4,7 @@ import { LangSwitch } from "@/components/content/lang-switch";
 import { Reveal } from "@/components/motion/reveal";
 import { copy, hasLocale, type Locale } from "@/lib/i18n";
 
-export default async function AboutPage({
-  params,
-}: {
-  params: Promise<{ lang: string }>;
-}) {
+export default async function AboutPage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
   if (!hasLocale(lang)) notFound();
 

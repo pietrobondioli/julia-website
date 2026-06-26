@@ -48,17 +48,20 @@ function labels(locale: Locale) {
   };
 }
 
-function EmbeddedPdf({ src, openLabel, fallback }: { src: string; openLabel: string; fallback: string }) {
+function EmbeddedPdf({
+  src,
+  openLabel,
+  fallback,
+}: {
+  src: string;
+  openLabel: string;
+  fallback: string;
+}) {
   return (
     <div className="overflow-hidden rounded-2xl border border-black/10 bg-white">
-      <iframe
-        src={src}
-        title="PDF preview"
-        className="h-[70vh] w-full"
-        loading="lazy"
-      />
+      <iframe src={src} title="PDF preview" className="h-[70vh] w-full" loading="lazy" />
       <div className="border-t border-black/10 px-4 py-2 text-xs text-black/60">
-        {fallback} {" "}
+        {fallback}{" "}
         <a href={src} target="_blank" rel="noreferrer" className="underline underline-offset-2">
           {openLabel}
         </a>
@@ -83,7 +86,15 @@ export function MediaGallery({ locale, gallery = [], video }: MediaGalleryProps)
         <div className="space-y-2">
           <p className="text-xs uppercase tracking-[0.14em] text-black/55">{text.video}</p>
           <div className="overflow-hidden rounded-2xl border border-black/10 bg-black">
-            <video className="aspect-video w-full" controls playsInline preload="metadata" src={safeVideo} />
+            <video
+              className="aspect-video w-full"
+              controls
+              playsInline
+              preload="metadata"
+              src={safeVideo}
+            >
+              <track kind="captions" />
+            </video>
           </div>
         </div>
       ) : null}
@@ -95,9 +106,17 @@ export function MediaGallery({ locale, gallery = [], video }: MediaGalleryProps)
 
             if (imageExts.has(ext)) {
               return (
-                <li key={src} className="overflow-hidden rounded-2xl border border-black/10 bg-white">
+                <li
+                  key={src}
+                  className="overflow-hidden rounded-2xl border border-black/10 bg-white"
+                >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={src} alt="Project media" loading="lazy" className="h-auto w-full object-cover" />
+                  <img
+                    src={src}
+                    alt="Project media"
+                    loading="lazy"
+                    className="h-auto w-full object-cover"
+                  />
                 </li>
               );
             }
@@ -113,8 +132,19 @@ export function MediaGallery({ locale, gallery = [], video }: MediaGalleryProps)
 
             if (videoExts.has(ext)) {
               return (
-                <li key={src} className="overflow-hidden rounded-2xl border border-black/10 bg-black">
-                  <video className="aspect-video w-full" controls playsInline preload="metadata" src={src} />
+                <li
+                  key={src}
+                  className="overflow-hidden rounded-2xl border border-black/10 bg-black"
+                >
+                  <video
+                    className="aspect-video w-full"
+                    controls
+                    playsInline
+                    preload="metadata"
+                    src={src}
+                  >
+                    <track kind="captions" />
+                  </video>
                 </li>
               );
             }
@@ -122,7 +152,9 @@ export function MediaGallery({ locale, gallery = [], video }: MediaGalleryProps)
             if (docExts.has(ext)) {
               return (
                 <li key={src} className="rounded-2xl border border-black/10 bg-white p-4">
-                  <p className="mb-2 text-xs uppercase tracking-[0.14em] text-black/55">{text.document}</p>
+                  <p className="mb-2 text-xs uppercase tracking-[0.14em] text-black/55">
+                    {text.document}
+                  </p>
                   <a
                     href={src}
                     target="_blank"
@@ -137,7 +169,12 @@ export function MediaGallery({ locale, gallery = [], video }: MediaGalleryProps)
 
             return (
               <li key={src} className="rounded-2xl border border-black/10 bg-white p-4">
-                <a href={src} target="_blank" rel="noreferrer" className="text-sm underline underline-offset-2">
+                <a
+                  href={src}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-sm underline underline-offset-2"
+                >
                   {text.open}
                 </a>
               </li>

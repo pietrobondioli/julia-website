@@ -1,11 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  allowedDevOrigins: [
-    "loud-guests-roll.loca.lt",
-    "khaki-rabbits-sink.loca.lt",
-    "*.loca.lt",
-  ],
+  allowedDevOrigins: ["loud-guests-roll.loca.lt", "khaki-rabbits-sink.loca.lt", "*.loca.lt"],
   async rewrites() {
     return [
       {

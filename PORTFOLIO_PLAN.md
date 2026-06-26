@@ -79,8 +79,8 @@ Casos inicialmente candidatos a Tier A:
 
 ### Mídia
 - Originais ficam fora do app para preservação
-- Seleção para web em `site/public/media/...`
-- Convenção por projeto: `site/public/media/<slug-do-projeto>/...`
+- Entrega web principal via Cloudinary (URLs em frontmatter)
+- Fallback/local dev via rota `/media/[slug]/...` quando necessário
 
 ---
 
@@ -135,6 +135,76 @@ Casos inicialmente candidatos a Tier A:
 
 ---
 
-## Próximo passo imediato
+## Backlog de Melhorias (no-regret, antes do redesign)
 
-Scaffold técnico + criação de templates markdown bilíngues para começar a preencher cases.
+1. **Qualidade de conteúdo (prioridade máxima)**
+   - Preencher narrativa real dos 5 Tier A primeiro
+   - Padronizar profundidade mínima por case (contexto, desafio, estratégia, execução, resultado)
+2. **SEO técnico**
+   - Metadata por rota/case (title, description, canonical)
+   - Open Graph consistente para home + cases
+   - `sitemap.xml` e `robots.txt`
+3. **Medição de produto**
+   - Vercel Analytics + eventos-chave (view case, clique Instagram, troca de idioma)
+4. **Acessibilidade baseline**
+   - Alt text por mídia
+   - Hierarquia semântica, foco visível, contraste validado
+5. **Confiabilidade de mídia**
+   - Zerar links quebrados (`/media/...` residuais ou URLs inacessíveis)
+   - Estratégia para arquivos pesados (compressão/conversão por lote)
+
+---
+
+## Preparação Dev para Escalar Conteúdo + Interatividade Futura
+
+### 1) Contrato de conteúdo (anti-caos)
+- Criar schema validado para frontmatter (ex: Zod)
+- Campos obrigatórios por tipo de case (Tier A vs Tier B)
+- Falhar build quando markdown estiver inválido
+
+### 2) Pipeline de conteúdo previsível
+- Comando único de sync (`npm run content:sync`) para:
+  - validar markdown
+  - checar links de mídia
+  - gerar artefatos derivados (índice, stats, slugs)
+- Script de lint de conteúdo no CI
+
+### 3) Modelo de mídia pronto para crescimento
+- Adicionar `mediaManifest` opcional por case (ordem, tipo, legenda, créditos)
+- Separar “asset bruto” de “asset de apresentação”
+- Definir presets de transformação (thumb, full, vídeo teaser)
+
+### 4) Arquitetura para experiências interativas
+- Criar “blocks” de case orientados a composição (`text`, `gallery`, `video`, `quote`, `timeline`, `interactive`)
+- Evitar lógica hardcoded por slug
+- Cada bloco com fallback estático (SSR-friendly)
+
+### 5) Camada de animação desacoplada
+- Centralizar tokens de motion (duração, easing, intensidade)
+- Separar animação de entrada vs narrativa de scroll
+- Feature flag para desligar experiências pesadas por página/dispositivo
+
+### 6) Performance budget desde agora
+- Definir orçamento por rota (JS, imagens, vídeo)
+- Lazy loading agressivo para mídia não crítica
+- Estratégia de poster/preview para vídeos
+
+### 7) Observabilidade e qualidade de release
+- CI com: lint, build, validação de conteúdo, link check
+- Preview deploy obrigatório por PR
+- Checklist de publicação de case novo
+
+### 8) Flexibilidade para futuro CMS (se quiser)
+- Manter adaptador de dados (hoje markdown, amanhã CMS)
+- Interface única `getCases/getCaseBySlug` sem acoplar UI à origem dos dados
+
+---
+
+## Próximo passo recomendado (dev-first)
+
+Implementar em ordem:
+1. Validador de frontmatter + fail build
+2. Script de verificação de mídia quebrada
+3. Estrutura de blocos de case (`blocks`) com renderer simples
+
+Com isso, o redesign futuro muda “pele”, não fundação.

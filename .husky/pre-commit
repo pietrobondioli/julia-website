@@ -1,0 +1,38 @@
+#!/bin/sh
+
+set -e
+
+tmp_file="$(mktemp)"
+
+git diff --cached --name-only --diff-filter=ACMR -z | while IFS= read -r -d '' file; do
+  case "$file" in
+    web/*.ts|web/*.tsx|web/*.js|web/*.jsx|web/*.mjs|web/*.cjs|web/*.json|web/**/*.ts|web/**/*.tsx|web/**/*.js|web/**/*.jsx|web/**/*.mjs|web/**/*.cjs|web/**/*.json)
+      printf '%s\0' "$file" >> "$tmp_file"
+      ;;
+  esac
+done
+
+if [ ! -s "$tmp_file" ]; then
+  rm -f "$tmp_file"
+  exit 0
+fi
+
+echo "Running Biome on staged web files..."
+
+python3 - "$tmp_file" <<'PY'
+import subprocess
+import sys
+
+tmp = sys.argv[1]
+with open(tmp, 'rb') as f:
+    files = [x.decode('utf-8') for x in f.read().split(b'\0') if x]
+
+web_files = [p[len('web/'):] for p in files if p.startswith('web/')]
+if not web_files:
+    raise SystemExit(0)
+
+subprocess.run(["npx", "biome", "format", "--write", *web_files], cwd="web", check=True)
+subprocess.run(["git", "add", *files], check=True)
+PY
+
+rm -f "$tmp_file"

@@ -13,14 +13,7 @@ type CaseCardProps = {
   viewLabel: string;
 };
 
-export function CaseCard({
-  item,
-  locale,
-  tierA,
-  tierB,
-  projectsPath,
-  viewLabel,
-}: CaseCardProps) {
+export function CaseCard({ item, locale, tierA, tierB, projectsPath, viewLabel }: CaseCardProps) {
   return (
     <article className="group rounded-2xl border border-black/10 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
       <div className="mb-4 flex items-center justify-between gap-3">

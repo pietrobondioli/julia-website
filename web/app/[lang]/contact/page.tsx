@@ -6,11 +6,7 @@ import { copy, hasLocale, type Locale } from "@/lib/i18n";
 
 const INSTAGRAM_URL = "https://instagram.com/";
 
-export default async function ContactPage({
-  params,
-}: {
-  params: Promise<{ lang: string }>;
-}) {
+export default async function ContactPage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
   if (!hasLocale(lang)) notFound();
 

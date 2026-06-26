@@ -13,8 +13,8 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import dotenv from "dotenv";
 import { v2 as cloudinary } from "cloudinary";
+import dotenv from "dotenv";
 
 dotenv.config({ path: path.resolve(process.cwd(), ".env.local") });
 
@@ -78,7 +78,7 @@ const EXT_RESOURCE_TYPE = {
 function sanitizePublicIdPart(input) {
   return input
     .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\p{M}/gu, "")
     .replace(/[^a-zA-Z0-9/_-]+/g, "-")
     .replace(/-+/g, "-")
     .replace(/^[-/]+|[-/]+$/g, "")
@@ -146,7 +146,7 @@ function parseYamlList(content, key) {
   const items = [];
 
   for (const line of lines) {
-    if (line.startsWith("  - \"")) {
+    if (line.startsWith('  - "')) {
       items.push(line.replace(/^\s*-\s*"/, "").replace(/"\s*$/, ""));
       continue;
     }
@@ -198,10 +198,9 @@ function replaceYamlList(content, key, values) {
   }
 
   const after = lines.slice(endLine).join("\n");
-  const newBlock = [
-    `${key}:`,
-    ...values.map((v) => `  - "${v.replaceAll("\"", "\\\"")}"`),
-  ].join("\n");
+  const newBlock = [`${key}:`, ...values.map((v) => `  - "${v.replaceAll('"', '\\"')}"`)].join(
+    "\n",
+  );
 
   return `${before}${newBlock}\n${after}`;
 }

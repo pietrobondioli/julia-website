@@ -22,7 +22,9 @@ export default async function ProjectDetailPage({
     <main className="space-y-10 pb-20">
       <header className="space-y-4">
         <div className="flex items-center justify-between gap-4">
-          <p className="text-xs uppercase tracking-[0.2em] text-black/55">{item.client ?? "Projeto"}</p>
+          <p className="text-xs uppercase tracking-[0.2em] text-black/55">
+            {item.client ?? "Projeto"}
+          </p>
           <LangSwitch locale={locale} pathAfterLocale={`/projects/${slug}`} />
         </div>
         <h1 className="text-4xl md:text-6xl">{item.title}</h1>

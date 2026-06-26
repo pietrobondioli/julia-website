@@ -16,6 +16,15 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Dev quality checks
+
+```bash
+npm run hooks:install   # one-time: enable repo git hooks
+npm run check:content   # validate case frontmatter + locale pairs
+npm run check:media     # detect local /media refs + broken remote URLs
+npm run biome:check     # biome check
+```
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.

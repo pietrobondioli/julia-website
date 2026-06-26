@@ -8,11 +8,7 @@ import { Reveal } from "@/components/motion/reveal";
 import { getCasesByLocale } from "@/lib/content";
 import { copy, hasLocale, type Locale } from "@/lib/i18n";
 
-export default async function LocaleHome({
-  params,
-}: {
-  params: Promise<{ lang: string }>;
-}) {
+export default async function LocaleHome({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
   if (!hasLocale(lang)) notFound();
 
